@@ -17,14 +17,16 @@ Been there, afraid to be there? keep reading.
 3. Local image pushed to production environment 
 4. All steps are manual, prone to failure and errors
 
-### And what can be done differently?
-
-![mlops at a glance](pics/opse2e.png)
 
 ## What is MLOps ?
 MLOps, or DevOps for machine learning, enables data science and IT teams to collaborate and increase the pace of model development and deployment via monitoring, validation, and governance of machine learning models.
 
 ![mlops overview](pics/mloverview.png)
+
+### And what can be done differently?
+
+![mlops at a glance](pics/opse2e.png)
+
 
 ## Software Components
 Our problem in this scenario is the computer vision 101, or the bellow world of cv. mnist - classification of hand written digits. as part of the workshop, you will be able to either create your own model, or download and use and existing one, the goal here is not to learn how to create models or improve them, rather how to orchestrate the science of deploying it correctly. 
