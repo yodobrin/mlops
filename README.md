@@ -45,6 +45,17 @@ We will be using [Data Store](https://docs.microsoft.com/en-us/azure/machine-lea
 #### Managed Identity
 When submitting an experiment (of any type) to an AML cluster, one needs to take into consideration the authorization required to access the data. in a nutshell, it is highly recommended to use minimal authorization on data elements. always look for the minimal granted access. The cluster will be using either a system assigned identity or if you associate a user managed identity. I had successful data access using the [user managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-portal).
 
+#### DataStore & Dataset 
+DataStore are references to multi type of storage repository, starting from databases, blob storage files and more. With datasets, you can:
+- Keep a single copy of data in your storage, referenced by datasets.
+- Seamlessly access data during model training without worrying about connection strings or data paths.Learn more about how to train with datasets.
+- Share data and collaborate with other users.
+
+### ML Taxonomy 
+For reference, there are multiple modules in play, here is a diagram, showing them all in one
+
+![ml taxonomy](pics/mltaxonomy.png)
+
 
 
 dig more...
