@@ -58,4 +58,4 @@ For reference, there are multiple modules in play, here is a diagram, showing th
 
 
 
-dig more...
+Ready to [start](workshop.md)? 
