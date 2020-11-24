@@ -1,6 +1,8 @@
 # mlops workshop
 This workshop will guide you through the basics of Azure Machine Learning and focus on mlops.
 
+![ML e2e life cycle] (../pics/mle2e.png)
+
 ## The use case
 Consider you are a data scientist working on computer vision model. During research you reached good results and your business users are happy with such result. The model is deployed to an aks cluster, the sun is shining, the birds are singing, a dream.
 However, you think you can do better, you dream of it, and you reach your home office one day, with a different approach, no one has ever attempted it. you run you local tests with the training and validation you got months back, the results you get are showing an improvement of 5-7% in accuracy, you feel on top of the world! your buddy at devops, answers your call, and asks you to provide him with your locally built image, you let him pull it from your local registry, he deploys it to production on a thursday afternoon. You go back to your living room, ready to bing 'The boys' since you feel on top of the world.
@@ -17,6 +19,8 @@ Been there, afraid to be there? keep reading.
 
 ### And what can be done differently?
 
+![mlops at a glance] (../pics/opse2e.png)
+
 ## Software Components
 Our problem in this scenario is the computer vision 101, or the bellow world of cv. mnist - classification of hand written digits. as part of the workshop, you will be able to either create your own model, or download and use and existing one, the goal here is not to learn how to create models or improve them, rather how to orchestrate the science of deploying it correctly. 
 
@@ -30,6 +34,10 @@ Well, you can start writing digits till hte cows come home, or use this [link](h
 ### Azure Machine Learning
 start [here](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-1st-experiment-sdk-setup)
 We will be using [Data Store](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-access-data)
+
+#### Managed Identity
+When submitting an experiment (of any type) to an AML cluster, one needs to take into consideration the authorization required to access the data. in a nutshell, it is highly recommended to use minimal authorization on data elements. always look for the minimal granted access. The cluster will be using either a system assigned identity or if you associate a user managed identity. I had successful data access using the [user managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-portal).
+
 
 
 dig more...
