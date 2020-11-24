@@ -1,7 +1,7 @@
 # mlops workshop
 This workshop will guide you through the basics of Azure Machine Learning and focus on mlops.
 
-![ML e2e life cycle] (pics/mle2e.png)
+![ML e2e life cycle] (https://github.com/yodobrin/mlops/blob/main/pics/mle2e.png)
 
 ## The use case
 Consider you are a data scientist working on computer vision model. During research you reached good results and your business users are happy with such result. The model is deployed to an aks cluster, the sun is shining, the birds are singing, a dream.
@@ -19,7 +19,7 @@ Been there, afraid to be there? keep reading.
 
 ### And what can be done differently?
 
-![mlops at a glance] (pics/opse2e.png)
+![mlops at a glance] (https://github.com/yodobrin/mlops/blob/main/pics/opse2e.png)
 
 ## Software Components
 Our problem in this scenario is the computer vision 101, or the bellow world of cv. mnist - classification of hand written digits. as part of the workshop, you will be able to either create your own model, or download and use and existing one, the goal here is not to learn how to create models or improve them, rather how to orchestrate the science of deploying it correctly. 
