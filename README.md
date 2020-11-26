@@ -1,6 +1,8 @@
 # mlops workshop
 This workshop will guide you through the basics of Azure Machine Learning and focus on mlops.
 
+This is a high level overview of ml typical process
+
 ![ML e2e life cycle](pics/mle2e.png)
 
 ## The use case
