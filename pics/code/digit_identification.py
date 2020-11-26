@@ -1,6 +1,6 @@
 
 # Copyright (c) Microsoft. All rights reserved.
-# Licensed under the MIT license.
+# Licensed under the MIT license. 
 
 import os
 import numpy as np
@@ -8,7 +8,7 @@ import tensorflow as tf
 from PIL import Image
 from azureml.core import Model
 
-
+ 
 def init():
     global g_tf_sess
 
