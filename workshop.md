@@ -38,4 +38,4 @@ You can decide to implement part of the requirements.
 For example you can decide that the verification data is constant, and should not be provided as parameter, same for the compute or KPIs.
 
 #### Sample notebook
-The notebook available within this repo, is addressing the baseline for such process. it is expected to be enhanced. 
+The [notebook](sample-pipeline.ipynb) available within this repo, is addressing the baseline for such process. it is expected to be enhanced. 
