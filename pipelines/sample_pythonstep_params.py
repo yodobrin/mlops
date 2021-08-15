@@ -1,12 +1,12 @@
 import azureml.core
-from azureml.core import Workspace, Experiment
+from azureml.core import Workspace, Experiment, Datastore
 from azureml.core.compute import ComputeTarget, AmlCompute
-# from azureml.data.datapath import DataPath, DataPathComputeBinding
-# from azureml.widgets import RunDetails
+from azureml.data.datapath import DataPath, DataPathComputeBinding
 
 from azureml.pipeline.core import PipelineParameter
 from azureml.pipeline.core import Pipeline, PipelineRun
 from azureml.pipeline.steps import PythonScriptStep
+
 
 def get_published_pipeline(ws,name,version):
     """
@@ -49,20 +49,34 @@ compute_target = create_cluster(ws,2,120,'dp100','Standard_DS2_v2')
 # reference the source directory: where all your files including the main script
 source_directory = '../src'
 
-# create pipeline string parameters
-string_pipeline_1param = PipelineParameter(name="1st_string", default_value='sample_1_string_default_value')
-string_pipeline_2param = PipelineParameter(name="2nd_string", default_value='sample_2_string_default_value')
+# create pipeline string parameters, input datastore, output datastore (if needed) and path params
+input_ds_name = PipelineParameter(name="input_ds_name", default_value='landing')
+output_ds_name = PipelineParameter(name="output_ds_name", default_value='landing')
+path_param1 = PipelineParameter(name="path_param1", default_value='silver')
+path_param2 = PipelineParameter(name="path_param2", default_value='silver')
+# data store credentials params to be used by the pipeline
+tenant = PipelineParameter(name="tenant", default_value='your tenant')
+client_id = PipelineParameter(name="client_id", default_value='your client id - registed of the data store')
+client_secret = PipelineParameter(name="client_secret", default_value='your client secret')
+# data set name to be created
+ds_name = PipelineParameter(name="ds_name", default_value='the name of the registered data set')
 
-# TODO - add more complicated params, and datapaths
 
 # create pipeline python step
 # note the script name must match the main script that needs to run
 
 train_step = PythonScriptStep(
-    name='train_step',
+    name='a_step',
     script_name="demo_train.py",
-    arguments=["--arg1", string_pipeline_1param, "--arg2", string_pipeline_2param],
-    compute_target=compute_target, 
+    arguments=["--in_data_store_name", input_ds_name, 
+        "--out_data_store_name", output_ds_name,
+        "--path_param1",path_param1,
+        "--path_param2",path_param2,
+        "--tenant",tenant,
+        "--client_id",client_id,
+        "--client_secret",client_secret,
+        "--ds_name",ds_name],
+    compute_target=compute_target,
     source_directory=source_directory)
 
 
@@ -72,7 +86,7 @@ train_step = PythonScriptStep(
 pipeline = Pipeline(workspace=ws, steps=[train_step])
 
 # publish the pipeline
-published_pipeline = pipeline.publish(name="sample_2nd_pipeline",  description="Sample created from vscode showcasing param passing", version="3.0",continue_on_step_failure=True)
+published_pipeline = pipeline.publish(name="sample_5th_pipeline",  description="data path and arguments", version="1.0",continue_on_step_failure=True)
 
 # lookup a specific pipeline by name and version - to be used in a published endpoint
 # p_pipeline = get_published_pipeline(ws,"sample_2nd_pipeline","2.0")
