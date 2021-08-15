@@ -41,8 +41,32 @@ You can also train your own model see examples [here](https://docs.microsoft.com
 Well, you can start writing digits till hte cows come home, or use this [link](https://github.com/myleott/mnist_png)
 
 ### Azure Machine Learning
-start [here](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-1st-experiment-sdk-setup)
-We will be using [Data Store](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-access-data)
+Start [here](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-1st-experiment-sdk-setup).
+
+We will be using [Data Store](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-access-data), and [Data Sets](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-register-datasets).
+
+#### Pipeline - High level overview
+The pipeline used leverages [PythonStep](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.python_script_step.pythonscriptstep?view=azure-ml-py) to read data from data lake store, and register a dataset. The reason behind it, is to demonstrate common use case, where data is passed between steps. The pipeline will receive few parameters, which include:
+- the details of the service principla, which was used to register the datastore (tenant, client_id, client_secret)
+- the data store name (you can pass both in/out)
+- the path of the files to be used as dataset source
+- the name of the dataset to be registered
+Potential other parameter could be the tags to be used for the dataset.
+
+It is critical to use the spn within the step, if you are using data lake. **It will not work without it.**
+
+##### Defining pipeline parameters
+Init a parameter
+```tenant = PipelineParameter(name="tenant", default_value='your tenant')```
+Use it as part of the step:
+```arguments=[ "--tenant",tenant],```
+
+##### Passing parameters
+Parameters can be passed to the pipeline dependant on how you call the pipeline, either directly from the aml portal, or by calling it from Azure Data Factory, or as ```POST``` rest call.
+
+##### Using the parameters within a step
+the ``demo_train.py`` demonstrate how one can obtain the parameters and use them.
+
 
 #### Managed Identity
 When submitting an experiment (of any type) to an AML cluster, one needs to take into consideration the authorization required to access the data. in a nutshell, it is highly recommended to use minimal authorization on data elements. always look for the minimal granted access. The cluster will be using either a system assigned identity or if you associate a user managed identity. I had successful data access using the [user managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-portal).
